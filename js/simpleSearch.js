@@ -6,12 +6,12 @@ $(function(){
         search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
     };
 
-    $( "button#search" ).click(function() { simpleSearch });
+    $( "button#search" ).click(function() { simpleSearch; });
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
-        if ( event.which == 13 ) { simpleSearch; }
-    }
+        if ( event.which == 13 ) simpleSearch;
+    });
 })
 
 // Input: query string, results container, result HTML template
