@@ -10,8 +10,8 @@ $(function(){
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
-        if ( event.which == 13 ) { simpleSearch;
-    });
+        if ( event.which == 13 ) { simpleSearch; }
+    };
 })
 
 // Input: query string, results container, result HTML template
