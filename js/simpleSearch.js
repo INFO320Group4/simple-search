@@ -6,11 +6,11 @@ $(function(){
         search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
     };
 
-    $( "button#search" ).click(function() { simpleSearch; });
+    $( "button#search" ).click(function() simpleSearch() );
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
-        if ( event.which == 13 ) simpleSearch;
+        if ( event.which == 13 ) simpleSearch();
     });
 })
 
@@ -21,7 +21,7 @@ $(function(){
 function search(query, $container, $template){
     $.ajax({
         type: 'GET',
-        url: 'http://is-info320t4.ischool.uw.edu:8080/solr-example/collection1/select',
+        url: 'http://is-info320t4.ischool.uw.edu:8080//tomcat7/solr-example/collection1/select',
         dataType: 'JSONP',
         data: {
             'q': query,
