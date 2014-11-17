@@ -30,7 +30,7 @@ function search(query, $container, $template){
             'indent': 'false',
             'defType': 'edismax',
             // changes made to spellcheck
-            'q': '*:*'
+            'q': '*:*',
             'spellcheck': 'true',
             'spellcheck.build': 'true',
             'spellcheck.q': query,
