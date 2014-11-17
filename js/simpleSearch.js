@@ -24,11 +24,15 @@ function search(query, $container, $template){
         url: 'http://is-info320t4.ischool.uw.edu:8080/tomcat7/solr-example/collection1/select',
         dataType: 'JSONP',
         data: {
-            'q': query,
+            // 'q': query,
             'qf': 'content title^3.0',
             'wt': 'json',
             'indent': 'false',
             'defType': 'edismax',
+            // changes made to spellcheck
+            'q': '*:*'
+            'spellcheck': 'true',
+            'spellcheck.q': query,
         },
         jsonp: 'json.wrf',
         success: function (data) {
@@ -43,6 +47,7 @@ function search(query, $container, $template){
 // Output: void
 function renderResults(docs, $container, $template){
     $container.empty(); // If there are any previous results, remove them
+
     var result;
     $.each(docs, function(index, doc){
         result = $template.clone();
@@ -52,6 +57,7 @@ function renderResults(docs, $container, $template){
             .append( doc.title );
         result.find( ".url" ).append( doc.url );
         result.find( ".content" ).append( maxWords(doc.content, 100) );
+        // result.find(".content").append(pictureResults(doc.url, doc.content));
         result.removeClass( "template" );
         $container.append(result);
     });
@@ -70,4 +76,20 @@ function maxWords(content, max) {
 	cutContent += (idx + 1 == words.length ? "" : " ");
     }
     return cutContent + "...";
+}
+
+// work in progress
+function pictureResults(url, content) {
+    // create tag add picture
+    // findPicture(url, content);
+
+}
+
+// WIP
+function findPicture(url, content) {
+    var allRecipe = "allrecipes";
+    if (url.indexOf(allRecipe) > -1) {
+        content
+    }
+
 }
