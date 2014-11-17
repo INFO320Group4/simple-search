@@ -1,5 +1,7 @@
 // Doc ready
 $(function(){
+
+    var firstSearch = true;
     // Shortcut function that performs search with the correct parameters.
     // Can be called without any arguments inline 
     function simpleSearch() {
@@ -19,11 +21,7 @@ $(function(){
 // query, and then injects results into the DOM
 // Output: void
 function search(query, $container, $template){
-    $.ajax({
-        type: 'GET',
-        url: 'http://is-info320t4.ischool.uw.edu:8080/tomcat7/solr-example/collection1/select',
-        dataType: 'JSONP',
-        data: {
+    var ajaxData = {
             // 'q': query,
             'qf': 'content title^3.0',
             'wt': 'json',
@@ -32,9 +30,19 @@ function search(query, $container, $template){
             // changes made to spellcheck
             'q': '*:*',
             'spellcheck': 'true',
-            'spellcheck.build': 'true',
             'spellcheck.q': query,
-        },
+    }
+
+    if (firstSearch) {
+        ajaxData.spellcheck.build = true;
+        firstSearch = false;
+    }
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://is-info320t4.ischool.uw.edu:8080/tomcat7/solr-example/collection1/select',
+        dataType: 'JSONP',
+        data: ajaxData,
         jsonp: 'json.wrf',
         success: function (data) {
             renderResults(data.response.docs, $container, $template);
