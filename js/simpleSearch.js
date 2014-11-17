@@ -1,7 +1,7 @@
+var firstSearch = true;
 // Doc ready
 $(function(){
 
-    var firstSearch = true;
     // Shortcut function that performs search with the correct parameters.
     // Can be called without any arguments inline 
     function simpleSearch() {
