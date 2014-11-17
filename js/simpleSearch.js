@@ -32,6 +32,7 @@ function search(query, $container, $template){
             // changes made to spellcheck
             'q': '*:*'
             'spellcheck': 'true',
+            'spellcheck.build': 'true',
             'spellcheck.q': query,
         },
         jsonp: 'json.wrf',
