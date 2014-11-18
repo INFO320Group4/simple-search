@@ -28,7 +28,7 @@ function search(query, $container, $template){
             'indent': 'false',
             'defType': 'edismax',
             // changes made to spellcheck
-            'q': '*:*',
+            'q': query,
             'spellcheck': 'true',
             'spellcheck.q': query,
     }
