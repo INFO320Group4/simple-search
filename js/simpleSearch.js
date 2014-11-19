@@ -29,14 +29,14 @@ function search(query, $container, $template){
             'defType': 'edismax',
             // changes made to spellcheck
             'q': query,
-            //'spellcheck': 'true',
-            //'spellcheck.q': query,
+            'spellcheck': 'true',
+            'spellcheck.q': query,
     }
 
-    //if (firstSearch) {
-    //    ajaxData.spellcheck.build = true;
-    //    firstSearch = false;
-    //}
+    if (firstSearch) {
+        ajaxData.spellcheck.build = true;
+        firstSearch = false;
+    }
 
     $.ajax({
         type: 'GET',
@@ -46,6 +46,7 @@ function search(query, $container, $template){
         jsonp: 'json.wrf',
         success: function (data) {
             renderResults(data.response.docs, $container, $template);
+            renderSpellcheck(data.spellcheck.docs, $container, $template);
         }
     });
 }
@@ -56,8 +57,6 @@ function search(query, $container, $template){
 // Output: void
 function renderResults(docs, $container, $template){
     $container.empty(); // If there are any previous results, remove them
-
-    alert(docs);
 
     var result;
     $.each(docs, function(index, doc){
@@ -87,6 +86,17 @@ function maxWords(content, max) {
 	cutContent += (idx + 1 == words.length ? "" : " ");
     }
     return cutContent + "...";
+}
+
+// Input: JSON array of spellcheck, results container, result HTML template
+// Effect: Replaces results container with spellchecks, and renders
+// the appropriate HTML
+// Output: void
+function renderSpellchecks(docs, $container, $template) {
+    $container.empty();
+    alert(docs.suggestions.suggestion[1]);
+    // var result = $template.clone();
+
 }
 
 // work in progress
