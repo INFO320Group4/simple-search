@@ -48,7 +48,7 @@ function search(query, $container, $template){
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
             } else {
-                $(results).innerHTML = JSON.stringify(data.spellcheck.suggestions.suggestion);
+                $(results).innerHTML = JSON.stringify(data.spellcheck.suggestions[2]);
                 // renderSpellcheck(data.spellcheck.suggestions, $container, $template);
             }
         }
