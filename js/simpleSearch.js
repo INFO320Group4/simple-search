@@ -92,7 +92,7 @@ function maxWords(content, max) {
 // Effect: Replaces results container with spellchecks, and renders
 // the appropriate HTML
 // Output: void
-function renderSpellchecks(docs, $container, $template) {
+function renderSpellcheck(docs, $container, $template) {
     $container.empty();
     alert(docs.suggestions.suggestion[1]);
     // var result = $template.clone();
