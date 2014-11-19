@@ -29,8 +29,8 @@ function search(query, $container, $template){
             'defType': 'edismax',
             // changes made to spellcheck
             'q': query,
-            'spellcheck': 'true',
-            'spellcheck.q': query,
+            //'spellcheck': 'true',
+            //'spellcheck.q': query,
     }
 
     if (firstSearch) {
