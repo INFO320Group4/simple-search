@@ -33,10 +33,10 @@ function search(query, $container, $template){
             //'spellcheck.q': query,
     }
 
-    if (firstSearch) {
-        ajaxData.spellcheck.build = true;
-        firstSearch = false;
-    }
+    //if (firstSearch) {
+    //    ajaxData.spellcheck.build = true;
+    //    firstSearch = false;
+    //}
 
     $.ajax({
         type: 'GET',
