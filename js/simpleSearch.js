@@ -45,8 +45,12 @@ function search(query, $container, $template){
         data: ajaxData,
         jsonp: 'json.wrf',
         success: function (data) {
-            renderResults(data.response.docs, $container, $template);
-            // renderSpellcheck(data.spellcheck.suggestions, $container, $template);
+            if (data.response.numFound != 0) {
+                renderResults(data.response.docs, $container, $template);
+            } else {
+                alert(JSON.stringify(data.spellcheck.suggestions));
+                // renderSpellcheck(data.spellcheck.suggestions, $container, $template);
+            }
         }
     });
 }
