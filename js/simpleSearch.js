@@ -48,8 +48,7 @@ function search(query, $container, $template){
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
             } else {
-                $(results).innerHTML = JSON.stringify(data.spellcheck.suggestions[2]);
-                // renderSpellcheck(data.spellcheck.suggestions, $container, $template);
+                renderSpellcheck(JSON.stringify(data.spellcheck.suggestions[1].suggestion), $container, $template);
             }
         }
     });
@@ -97,10 +96,15 @@ function maxWords(content, max) {
 // the appropriate HTML
 // Output: void
 function renderSpellcheck(suggestions, $container, $template) {
-    $container.empty();
-    var spellchecks = JSON.parse(suggestions);
-    alert(JSON.stringify(suggestions));
+    $container.empty(); // If there are any previous results, remove them
 
+    var result;
+    result = $template.clone();
+    result.find( ".title > a" )
+        .find( "h3" )
+        .append( "Did you mean? " + suggestions );
+    result.removeClass( "template" );
+    $container.append(result);
 }
 
 // work in progress
