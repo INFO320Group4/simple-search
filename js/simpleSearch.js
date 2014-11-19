@@ -46,7 +46,7 @@ function search(query, $container, $template){
         jsonp: 'json.wrf',
         success: function (data) {
             renderResults(data.response.docs, $container, $template);
-            renderSpellcheck(data.spellcheck.docs, $container, $template);
+            renderSpellcheck(data.spellcheck.suggestions, $container, $template);
         }
     });
 }
@@ -92,10 +92,10 @@ function maxWords(content, max) {
 // Effect: Replaces results container with spellchecks, and renders
 // the appropriate HTML
 // Output: void
-function renderSpellcheck(docs, $container, $template) {
+function renderSpellcheck(suggestions, $container, $template) {
     $container.empty();
-    alert(docs.suggestions.suggestion[1]);
-    // var result = $template.clone();
+    var spellchecks = JSON.parse(suggestions);
+    alert(JSON.stringify(suggestions));
 
 }
 
