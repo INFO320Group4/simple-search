@@ -57,6 +57,8 @@ function search(query, $container, $template){
 function renderResults(docs, $container, $template){
     $container.empty(); // If there are any previous results, remove them
 
+    alert(docs);
+
     var result;
     $.each(docs, function(index, doc){
         result = $template.clone();
