@@ -46,7 +46,7 @@ function search(query, $container, $template){
         jsonp: 'json.wrf',
         success: function (data) {
             renderResults(data.response.docs, $container, $template);
-            renderSpellcheck(data.spellcheck.suggestions, $container, $template);
+            // renderSpellcheck(data.spellcheck.suggestions, $container, $template);
         }
     });
 }
