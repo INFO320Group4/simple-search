@@ -15,14 +15,20 @@
     <script src="js/simpleSearch.js" type="text/javascript"></script>
     <script type="text/javascript">
       $.ajaxSetup({
-        scriptCharset: "utf-8",
-        contentType: "application/json; charset=utf-8"
-      });
-      var photo;
-      $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://www.epicurious.com/recipes/food/views/Bite-Size-Chipotle-Chicken-Soft-Tacos-em-tinga-de-pollo-em-51142270') + '?callback=?', function(data){
-          photo = data.contents;
-          alert(photo.html);
-      });
+    scriptCharset: "utf-8", //maybe "ISO-8859-1"
+    contentType: "application/json; charset=utf-8"
+});
+
+$.getJSON('http://whateverorigin.org/get?url=' + 
+    encodeURIComponent('http://google.com') + '&callback=?',
+    function(data) {
+        console.log("> ", data);
+        //If the expected response is text/plain
+        $("#target").html(data.contents);
+        //If the expected response is JSON
+        //var response = $.parseJSON(data.contents);
+        //console.log("> ", response);
+});
     </script>
     <!-- Google Analytics Section -->
     <script>
