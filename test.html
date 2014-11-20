@@ -14,15 +14,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/simpleSearch.js" type="text/javascript"></script>
     <script type="text/javascript">
-      $.ajax({
-        dataType: "json",
-        url: "http://allrecipes.com/Recipe/Sweet-and-Sour-Pork-III/Detail.aspx?soid=recs_recipe_seed",
-        data: data,
-        success: success
+      $.ajaxSetup({
+        scriptCharset: "utf-8",
+        contentType: "application/json; charset=utf-8"
       });
       var photo;
-      $.getJSON('http://allrecipes.com/Recipe/Sweet-and-Sour-Pork-III/Detail.aspx?soid=recs_recipe_seed', function(data))
-        alert(data);
+      $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://allrecipes.com/Recipe/Sweet-and-Sour-Pork-III/Detail.aspx?soid=recs_recipe_seed') + '&callback=?', function(data){
+          photo = data.contents;
+          alert(photo);
       });
     </script>
     <!-- Google Analytics Section -->
