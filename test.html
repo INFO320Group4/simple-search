@@ -19,9 +19,9 @@
         contentType: "application/json; charset=utf-8"
       });
       var photo;
-      $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://allrecipes.com/Recipe/Sweet-and-Sour-Pork-III/Detail.aspx?soid=recs_recipe_seed') + '?callback=?', function(data){
+      $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://www.epicurious.com/recipes/food/views/Bite-Size-Chipotle-Chicken-Soft-Tacos-em-tinga-de-pollo-em-51142270') + '?callback=?', function(data){
           photo = data.contents;
-          alert(photo.text);
+          alert(photo);
       });
     </script>
     <!-- Google Analytics Section -->
