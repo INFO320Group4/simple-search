@@ -15,7 +15,8 @@
     <script src="js/simpleSearch.js" type="text/javascript"></script>
     <script type="text/javascript">
       $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://allrecipes.com/Recipe/Sweet-and-Sour-Pork-III/Detail.aspx?soid=recs_recipe_seed') + '&callback=?', function(data){
-        $('#results').load((data).find("#imgPhoto").text());
+        var photo = $(data).find("#imgPhoto").html();
+        $('#results').load(photo);
       });
     </script>
     <!-- Google Analytics Section -->
