@@ -21,7 +21,7 @@
       var photo;
       $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://www.epicurious.com/recipes/food/views/Bite-Size-Chipotle-Chicken-Soft-Tacos-em-tinga-de-pollo-em-51142270') + '?callback=?', function(data){
           photo = data.contents;
-          alert(photo);
+          alert(photo.html);
       });
     </script>
     <!-- Google Analytics Section -->
