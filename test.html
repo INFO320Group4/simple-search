@@ -19,7 +19,7 @@
         contentType: "application/json; charset=utf-8"
       });
       $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http://allrecipes.com/Recipe/Sweet-and-Sour-Pork-III/Detail.aspx?soid=recs_recipe_seed') + '&callback=?', function(data){
-          $("#imgPhoto").html(data.contents);
+          $("#results").html($(data.contents).find("#imgPhoto"));
       });
     </script>
     <!-- Google Analytics Section -->
