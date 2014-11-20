@@ -8,7 +8,7 @@ $(function(){
         search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
     };
 
-    $( "button#search" ).click(function() {simpleSearch});
+    $( "button#search" ).click(function() {simpleSearch()});
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
@@ -48,7 +48,7 @@ function search(query, $container, $template){
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
             } else {
-                renderSpellcheck(JSON.stringify(data.spellcheck.suggestions[1].suggestion), $container, $template);
+                renderSpellcheck(JSON.stringify(data.spellcheck.suggestions[1].suggestion), $container);
             }
         }
     });
@@ -95,16 +95,33 @@ function maxWords(content, max) {
 // Effect: Replaces results container with spellchecks, and renders
 // the appropriate HTML
 // Output: void
-function renderSpellcheck(suggestions, $container, $template) {
+function renderSpellcheck(suggestions, $container) {
     $container.empty(); // If there are any previous results, remove them
 
-    var result;
-    result = $template.clone();
-    result.find( ".title > a" )
-        .find( "h3" )
-        .append( "Did you mean? " + suggestions );
-    result.removeClass( "template" );
+    var spellings = JSON.parse(suggestions);
+    
+    var result = document.createElement("h3");
+    result.innerHTML = "Did you mean ";
+
+    var word = document.createElement("span");
+    word.className = "spellings";
+    word.id = spellings[0];
+    word.innerHTML = spellings[0];
+
+    result.appendChild(word);
+    for (var i = 1; i <= spellings.length - 1; i++) {
+        result.innerHTML += ", ";
+        var otherWord = document.createElement("span");
+        otherWord.className = "spellings";
+        otherWord.id = spellings[i];
+        otherWord.innerHTML = spellings[i];
+        result.appendChild(otherWord);
+    }
+    result.innerHTML += "?";
     $container.append(result);
+    $( ".spellings" ).on("click", function() {
+        search(event.target.id, $( "#results" ), $( ".template.result" ));
+    });
 }
 
 // work in progress

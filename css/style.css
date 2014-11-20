@@ -80,3 +80,9 @@ input#query {
 em {
     font-weight: 700;
 }
+
+.spellings {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
