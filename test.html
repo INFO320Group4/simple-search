@@ -24,13 +24,15 @@ $.getJSON('http://whateverorigin.org/get?url=' +
     function(data) {
         console.log("> ", data);
         //If the expected response is text/plain
-        $("#target").html(data.contents);
-        var x = data.contents.getElementById("recipe_image")
-        alert(x.innerHTML);
+        $("#target").html(parseImageURL(data.contents););
         //If the expected response is JSON
         //var response = $.parseJSON(data.contents);
         //console.log("> ", response);
 });
+
+function parseImageURL(html) {
+	return $(html).find(".recipe_image");
+}
     </script>
     <!-- Google Analytics Section -->
     <script>
