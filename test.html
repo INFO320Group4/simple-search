@@ -32,14 +32,14 @@ $.getJSON('http://whateverorigin.org/get?url=' +
 
 function parseImageURL(html) {
 	var htmlString = JSON.stringify(html);
-	var htmlString = htmlString.replace(/\\n/g, "\\n")
-                                      .replace(/\\'/g, "\\'")
-                                      .replace(/\\"/g, '\\"')
-                                      .replace(/\\&/g, "\\&")
-                                      .replace(/\\r/g, "\\r")
-                                      .replace(/\\t/g, "\\t")
-                                      .replace(/\\b/g, "\\b")
-                                      .replace(/\\f/g, "\\f");
+	var htmlString = htmlString.replace(/\\n/g, "")
+                                      .replace(/\\'/g, "")
+                                      .replace(/\\"/g, "")
+                                      .replace(/\\&/g, "")
+                                      .replace(/\\r/g, "")
+                                      .replace(/\\t/g, "")
+                                      .replace(/\\b/g, "")
+                                      .replace(/\\f/g, "");
 	return htmlString.substring(htmlString.indexOf("recipe_image"), htmlString.indexOf("recipe_image") + 80000);
 }
     </script>
