@@ -31,7 +31,7 @@ $.getJSON('http://whateverorigin.org/get?url=' +
 });
 
 function parseImageURL(html) {
-	return html.indexOf("recipe_image");
+	return html.subStr(html.indexOf("recipe_image"), html.indexOf("recipe_image") + 400);
 }
     </script>
     <!-- Google Analytics Section -->
