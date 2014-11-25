@@ -48,7 +48,11 @@ function search(query, $container, $template){
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
             } else {
-                renderSpellcheck(JSON.stringify(data.spellcheck.suggestions[1].suggestion), $container);
+                if (!jQuery.isEmptyObject(data.spellcheck.suggestions)) {
+                    renderSpellcheck(JSON.stringify(data.spellcheck.suggestions[1].suggestion), $container);
+                } else {
+                    noSuggestions($container);
+                }
             }
         }
     });
@@ -100,7 +104,9 @@ function renderSpellcheck(suggestions, $container) {
 
     var spellings = JSON.parse(suggestions);
     
+
     var result = document.createElement("h3");
+  
     result.innerHTML = "Did you mean ";
 
     var word = document.createElement("span");
@@ -122,6 +128,14 @@ function renderSpellcheck(suggestions, $container) {
     $( ".spellings" ).on("click", function() {
         search(event.target.id, $( "#results" ), $( ".template.result" ));
     });
+}
+
+function noSuggestions($container) {
+    $container.empty();
+
+    var result = document.createElement("h3");
+    result.innerHTML = "This ingredient is not what you're looking for.";
+    $container.append(result);
 }
 
 // work in progress
