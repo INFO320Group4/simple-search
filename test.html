@@ -32,8 +32,15 @@ $.getJSON('http://whateverorigin.org/get?url=' +
 
 function parseImageURL(html) {
 	var htmlString = JSON.stringify(html);
-	console.log(htmlString.substring(html.indexOf("recipe_image"), htmlString.indexOf("recipe_image") + 400));
-	return htmlString.substring(htmlString.indexOf("recipe_image"), htmlString.indexOf("recipe_image") + 400);
+	var htmlString = htmlString.replace(/\\n/g, "\\n")
+                                      .replace(/\\'/g, "\\'")
+                                      .replace(/\\"/g, '\\"')
+                                      .replace(/\\&/g, "\\&")
+                                      .replace(/\\r/g, "\\r")
+                                      .replace(/\\t/g, "\\t")
+                                      .replace(/\\b/g, "\\b")
+                                      .replace(/\\f/g, "\\f");
+	return htmlString.substring(htmlString.indexOf("recipe_image"), htmlString.indexOf("recipe_image") + 80000);
 }
     </script>
     <!-- Google Analytics Section -->
