@@ -45,6 +45,7 @@ function search(query, $container, $template){
         data: ajaxData,
         jsonp: 'json.wrf',
         success: function (data) {
+            $("#results").fadeToggle(0);
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
             } else {
@@ -54,6 +55,7 @@ function search(query, $container, $template){
                     noSuggestions($container);
                 }
             }
+            $("#results").fadeToggle();
         }
     });
 }
@@ -63,6 +65,7 @@ function search(query, $container, $template){
 // the appropriate HTML
 // Output: void
 function renderResults(docs, $container, $template){
+    //document.getElementById("results").style.display = "none";
     $container.empty(); // If there are any previous results, remove them
 
     var result;
@@ -78,6 +81,7 @@ function renderResults(docs, $container, $template){
         result.removeClass( "template" );
         $container.append(result);
     });
+    //document.getElementById("results").style.display = "block";
 }
 
 // Cuts off lengthy content to a given maximum number of words
@@ -104,7 +108,6 @@ function renderSpellcheck(suggestions, $container) {
 
     var spellings = JSON.parse(suggestions);
     
-
     var result = document.createElement("h3");
   
     result.innerHTML = "Did you mean ";
