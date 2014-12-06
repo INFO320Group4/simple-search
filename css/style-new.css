@@ -1,0 +1,81 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.align-center {
+	text-align: center;
+}
+
+.align-left {
+	text-align: left;
+}
+
+.align-right {
+	text-align: right;
+}
+
+h3 {
+	color: #ec870f;
+}
+body {
+	background: url("images/bg.png");
+}
+
+h1#logo {
+	display: block;
+	background: url("images/logo.png")  no-repeat;
+	width: 353px; height: 91px;
+	margin: 30px auto 30px auto;
+	text-indent: 9999999em;
+}
+
+input#search-box {
+	width: 80%;
+	height: 50px;
+	padding: 2px 10px 2px 10px;
+	font-size: 18px;
+	color: #606060;
+}
+
+button#search-button {
+	height: 50px;
+	width: 10%;
+	font-size: 16px;
+	background: #ec870f;
+	color: #ffffff;
+	margin-left: -5px;
+	padding: 0 20px 0 20px;
+	border: 1px solid gray;
+}
+
+form#search-form {
+	margin-bottom: 30px;
+}
+div#content {
+	background: #ffffff;
+}
+
+div.thumbnails {
+	margin-bottom: 30px;
+}
+
+div.thumbnails img {
+	border: 3px solid #dddee0;
+}
+div.thumbnails img:hover {
+	border: 3px solid #ec870f;
+}
+
+div.thumbnails img {
+	width: 175px;
+	height: 175px;
+}
+
+div#footer {
+	color: #bcbcbc;
+	font-size: 12px;
+}
