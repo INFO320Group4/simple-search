@@ -14,19 +14,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/simpleSearch.js" type="text/javascript"></script>
     <script type="text/javascript">
-      $.ajaxSetup({
-    scriptCharset: "utf-8", //maybe "ISO-8859-1"
-    contentType: "application/json; charset=utf-8"
-});
-
-  $.getJSON('http://anyorigin.com/dev/get?url=http%3A//allrecipes.com/recipe/high-temperature-eye-of-round-roast/&callback=?', function(data){
+  $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('http:A//allrecipes.com/recipe/high-temperature-eye-of-round-roast/)' + '&callback=?', function(data){
   $('#target').html(data.contents);
 });
-
-function parseImageURL(html) {
-	var htmlString = JSON.stringify(html);
-
-}
     </script>
     <!-- Google Analytics Section -->
     <script>
