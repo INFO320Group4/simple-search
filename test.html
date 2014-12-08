@@ -19,28 +19,13 @@
     contentType: "application/json; charset=utf-8"
 });
 
-$.getJSON('http://whateverorigin.org/get?url=' + 
-    encodeURIComponent('http://www.epicurious.com/recipes/food/views/Bite-Size-Chipotle-Chicken-Soft-Tacos-em-tinga-de-pollo-em-51142270') + '&callback=?',
-    function(data) {
-        console.log("> ", data);
-        //If the expected response is text/plain
-        $("#target").html(parseImageURL(data.contents));
-        //If the expected response is JSON
-        //var response = $.parseJSON(data.contents);
-        //console.log("> ", response);
+  $.getJSON('http://anyorigin.com/dev/get?url=http%3A//allrecipes.com/recipe/high-temperature-eye-of-round-roast/&callback=?', function(data){
+  $('#target').html(data.contents);
 });
 
 function parseImageURL(html) {
 	var htmlString = JSON.stringify(html);
-	var htmlString = htmlString.replace(/\\n/g, "")
-                                      .replace(/\\'/g, "")
-                                      .replace(/\\"/g, "")
-                                      .replace(/\\&/g, "")
-                                      .replace(/\\r/g, "")
-                                      .replace(/\\t/g, "")
-                                      .replace(/\\b/g, "")
-                                      .replace(/\\f/g, "");
-	return htmlString.substring(htmlString.indexOf("recipe_image"), htmlString.indexOf("recipe_image") + 80000);
+
 }
     </script>
     <!-- Google Analytics Section -->
