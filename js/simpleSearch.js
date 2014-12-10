@@ -14,6 +14,12 @@ $(function(){
     $( "input#query" ).keypress(function( event ) {
         if ( event.which == 13 ) simpleSearch();
     });
+
+    if (typeof String.prototype.startsWith != 'function') {
+        String.prototype.startsWith = function (str) {
+            return this.slice(0, str.length) == str;
+        };
+    }
 })
 
 // Input: query string, results container, result HTML template
@@ -78,6 +84,7 @@ function renderResults(docs, $container, $template){
         result.find( ".url" ).append( doc.url );
         result.find( ".content" ).append( maxWords(doc.content, 100) );
         // result.find(".content").append(pictureResults(doc.url, doc.content));
+        // getIngredients(doc.url, doc.content);
         result.removeClass( "template" );
         $container.append(result);
     });
@@ -141,18 +148,25 @@ function noSuggestions($container) {
     $container.append(result);
 }
 
-// work in progress
-function pictureResults(url, content) {
-    // create tag add picture
-    // findPicture(url, content);
+/*
+function getIngredients(url, content) {
+    var allRecipe = "http://allrecipes.com/Recipe";
+    var epicurious = "http://www.epicurious.com/recipes/food";
 
-}
-
-// WIP
-function findPicture(url, content) {
-    var allRecipe = "allrecipes";
-    if (url.indexOf(allRecipe) > -1) {
-        content
+   if (url.startsWith(allRecipe)) {
+        
     }
+        
+    if (url.startsWith(epicurious)) {
 
+    }       
+ 
+    // allrecipe
+    // div class="ingred-left"
+    //
+    // epicurious
+    // http://www.epicurious.com/recipes/food
+    // ul class="ingredientsList first no-header" -> ingredients
+    // ul class="ingredientsList no-header" -> special equipment
 }
+*/
