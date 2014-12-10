@@ -1,37 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- This should be filled with keywords that best describe your search engine and the things that you are targeting -->
-    <meta name="keywords" content="dinner ideas,tonight,leftovers,left overs,home,appliances,diet,grocery,supermarket,recipe,search engine,ingredients,pantry,food,kitchen,dinner,dessert,entree,meal,easy"> 
-    <!-- This should be your team name -->
-    <meta name="author" content="Dans Mon Frigo, Corey Chan, Brandon Thepvongsa, Raymond Li, Seung Lee">
-    <!-- The title of you're webpage -->
-    <title>Simple Search</title>
-    <!-- Link to your style sheet -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <!-- Scripts to be loaded -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- link rel="icon" href="../../favicon.ico"> -->
+
+  <title>DansMonFrigo | Things for your fridge</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style-new.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/simpleSearch.js" type="text/javascript"></script>
-    <script type="text/javascript">
-
-    function based(url){
-        $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
-        var elements = $(data.contents);
-        var found = $('#imgPhoto', elements);
-         $('#target').html("<img src=\"" + found.attr("src") + "\">");
-       });
-     }
-
-    $(document).ready(function() {
-    document.getElementById("searchh").addEventListener("click", function() {
-      var url = $("#query").val();
-      based(url);
-    });
-  });
-
-
-    </script>
     <!-- Google Analytics Section -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -42,32 +26,93 @@
       ga('create', 'UA-56217858-2', 'auto');
       ga('send', 'pageview');
     </script>
-    <!-- After signing up for a google analytics account, you should add your website, and paste the script needed for tracking here -->
-  </head>
-  <body>
-    <div class="container">
-      <h1>Dans Mon Frigo</h1>
-      <div id="searchbox">
-  <!-- The input box where users will enter their query -->
-  <input id="query" type="text" placeholder="Search here..." required></input>
-  <button id="searchh" onclick="">Search</button>
-      </div>
-      <!-- Container where results will be filled in -->
-      <div id="results"></div>
-      <div id="target"></div>
-      <!-- Template for results.  Each result is then later inserted into the results container after we get results from a query -->
-      <!-- 
-      <img src="http://images.media-allrecipes.com/userphotos/250x250/00/26/51/265130.jpg" />
-    -->
-      <div class="template result">
-        <div class="title">
-          <a href="">
-            <h3></h3>
-          </a>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+
+    <body>
+
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navbar" >
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">DansMonFrigo</a>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#popular">Popular</a></li>
+              <li><a href="#about">About</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <div class="url"></div>
-        <div class="content"></div> 
+      </nav>
+
+      <div class="container" id="content">
+
+        <div class="starter-template">
+          <h1 id="logo">DansMonFrigo</h1>
+          <form id="search-form">
+            <input type="text" name="query" id="search-box"/>
+            <button type="submit" value="search" id="search-button">Search</button>
+          </form>
+
+          <h3 class="query-header">Stuff</h3>
+          <div id="results">
+
+
+            <a href="#">
+              <div class="search-result">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <img src="http://placehold.it/125x125" alt="image">
+                  </div>
+
+                  <div class="col-lg-10">
+                    <h3 class="recipe-title">Candied Jello Wrapper</h3>
+
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <ul>
+                          <li>Makes 4 servings</li>
+                          <li>Preperation Time: 15 minutes</li>
+                          <li>Cooking Time: 1 hour</li>
+                        </ul> 
+                      </div>
+                      <div class="col-lg-6">
+                        <ul>
+                          <li>1/2 tsp garlic powder</li>
+                          <li>4 chicken breasts</li>
+                          <li>1 whole tomato</li>
+                          <li>1/4 tbs tears of children</li>
+                        </ul>
+                      </div>
+                      </div><!-- end row ingredients -->
+                  </div> <!-- end ingredients column -->
+                </div> <!-- end row image/ingredients -->
+              </div> <!-- end search-result -->
+            </a>
+          </div>
+        </div>
+      </div><!-- /.container -->
+      <div class="container" id="footer">
+        <p class="align-center">Copyright 2014 &copy; DansMonFrigo</p>
       </div>
-    </div> <!-- container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/holder.js"></script>
   </body>
-</html>
+  </html>
