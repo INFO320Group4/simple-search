@@ -8,7 +8,9 @@ $(function(){
         search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
     };
 
-    $( "button#search" ).click(function() {simpleSearch()});
+    $( "button#search" ).click(function() {
+        simpleSearch()
+    });
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
@@ -77,7 +79,7 @@ function renderResults(docs, $container, $template){
             .append( doc.title );
         result.find( ".url" ).append( doc.url );
         result.find( ".content" ).append( maxWords(doc.content, 100) );
-        // result.find(".content").append(pictureResults(doc.url, doc.content));
+        result.find(".content").append(based(doc.url));
         result.removeClass( "template" );
         $container.append(result);
     });
@@ -141,18 +143,10 @@ function noSuggestions($container) {
     $container.append(result);
 }
 
-// work in progress
-function pictureResults(url, content) {
-    // create tag add picture
-    // findPicture(url, content);
-
-}
-
-// WIP
-function findPicture(url, content) {
-    var allRecipe = "allrecipes";
-    if (url.indexOf(allRecipe) > -1) {
-        content
-    }
-
+function based(url){
+        $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
+        var elements = $(data.contents);
+        var found = $('#imgPhoto', elements);
+         $('#result').html("<img src=\"" + found.attr("src") + "\">");
+    });
 }
