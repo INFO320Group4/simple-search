@@ -9,7 +9,7 @@ $(function(){
     };
 
     $( "button#search" ).click(function() {
-        simpleSearch()
+        simpleSearch();
     });
 
     // Performs search when 'enter' key is pressed
@@ -48,7 +48,7 @@ function search(query, $container, $template){
 
     $.ajax({
         type: 'GET',
-        url: 'http://is-info320t4.ischool.uw.edu:8080/tomcat7/solr-example/collection1/select',
+        url: 'http://is-info320t4.ischool.uw.edu:8080/solr-example/collection1/select',
         dataType: 'JSONP',
         data: ajaxData,
         jsonp: 'json.wrf',
@@ -79,18 +79,22 @@ function renderResults(docs, $container, $template){
 
     var result;
     $.each(docs, function(index, doc){
-        result = $template.clone();
-        result.find( ".title > a" )
-            .prop( "href", doc.url)
-            .find( "h3" )
-            .append( doc.title );
-        result.find( ".url" ).append( doc.url );
-        result.find( ".content" ).append( maxWords(doc.content, 100) );
+        //result = $template.clone();
+        //result.find( "a" ).prop( "href", doc.url);
+        //result.find( "h3" ).append( doc.title );
+        //result.find( ".url" ).append( doc.url );
+        //result.find( ".content" ).append( maxWords(doc.content, 100) );
         // result.find(".content").append(pictureResults(doc.url, doc.content));
-        result.find(".content").append(based(doc.url));
+        //result.find(".col-lg-2 > img").attr("src", based(doc.url));
         // getIngredients(doc.url, doc.content);
-        result.removeClass( "template" );
-        $container.append(result);
+        //result.removeClass( "template" );
+        //$container.append(result);
+
+        var result = $('<a>', {href: doc.url, class:"results"});
+        result.append("<div class=\"search-result\"><div class=\"row\"><div class=\"col-lg-2\">"+ based(doc.url) + "</div><div class=\"col-lg-10\"><h3 class=\"recipe-title\">" + doc.title + "</h3><div class=\"row\"> <div class=\"col-lg-6\"> <ul><li>Makes 4 servings</li> <li>Preperation Time: 15 minutes</li>   <li>Cooking Time: 1 hour</li>           </ul> </div><div class=\"col-lg-6\"> <ul><li>1/2 tsp garlic powder</li><li>4 chicken breasts</li><li>1 whole tomato</li> <li>1/4 tbs tears of children</li> </ul></div> </div><!-- end row ingredients --></div> <!-- end ingredients column --></div> <!-- end row image/ingredients --> </div> <!-- end search-result --></a>");
+        result.find('h3').html(doc.title);
+        $('#results').append(result);
+        
     });
     //document.getElementById("results").style.display = "block";
 }
@@ -155,8 +159,16 @@ function noSuggestions($container) {
 function based(url) {
         $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
         var elements = $(data.contents);
-        var found = $('#imgPhoto', elements);
-         $('#result').html("<img src=\"" + found.attr("src") + "\">");
+        if(/^.*\b(allrecipes)\b.*$/.test(url)){
+            var found = $('#imgPhoto', elements);
+            var image = "<img src=\"" + found.attr("src") + "\">"
+            return image;
+        }
+        if(/^.*\b(epicurious.com\/recipes)\b.*$/.test(url)){
+            var found = $('#recipe_image > img', elements);
+            var image = "<img src=\"http://www.epicurious.com/" + found.attr("src") + "\" alt=\"image\">";
+            return image;
+        }
     });
 }
 
