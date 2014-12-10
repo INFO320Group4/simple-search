@@ -8,7 +8,9 @@ $(function(){
         search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
     };
 
-    $( "button#search" ).click(function() {simpleSearch()});
+    $( "button#search" ).click(function() {
+        simpleSearch()
+    });
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
@@ -52,6 +54,7 @@ function search(query, $container, $template){
         jsonp: 'json.wrf',
         success: function (data) {
             $("#results").fadeToggle(0);
+            // currently it works so that when no results found, show spell checks
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
             } else {
@@ -84,6 +87,7 @@ function renderResults(docs, $container, $template){
         result.find( ".url" ).append( doc.url );
         result.find( ".content" ).append( maxWords(doc.content, 100) );
         // result.find(".content").append(pictureResults(doc.url, doc.content));
+        result.find(".content").append(based(doc.url));
         // getIngredients(doc.url, doc.content);
         result.removeClass( "template" );
         $container.append(result);
@@ -148,6 +152,14 @@ function noSuggestions($container) {
     $container.append(result);
 }
 
+function based(url) {
+        $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
+        var elements = $(data.contents);
+        var found = $('#imgPhoto', elements);
+         $('#result').html("<img src=\"" + found.attr("src") + "\">");
+    });
+}
+
 /*
 function getIngredients(url, content) {
     var allRecipe = "http://allrecipes.com/Recipe";
@@ -168,5 +180,4 @@ function getIngredients(url, content) {
     // http://www.epicurious.com/recipes/food
     // ul class="ingredientsList first no-header" -> ingredients
     // ul class="ingredientsList no-header" -> special equipment
-}
 */
