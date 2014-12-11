@@ -89,11 +89,20 @@ function renderResults(docs, $container, $template){
         // getIngredients(doc.url, doc.content);
         //result.removeClass( "template" );
         //$container.append(result);
-
-        var result = $('<a>', {href: doc.url, class:"results"});
-        result.append("<div class=\"search-result\"><div class=\"row\"><div class=\"col-lg-2\"><img src=\"http://placehold.it/125x125\" alt=\"image\"></div><div class=\"col-lg-10\"><h3 class=\"recipe-title\">" + doc.title + "</h3><div class=\"row\"> <div class=\"col-lg-6\"> <ul><li>Makes 4 servings</li> <li>Preperation Time: 15 minutes</li>   <li>Cooking Time: 1 hour</li></ul> </div><div class=\"col-lg-6\"> <ul><li>1/2 tsp garlic powder</li><li>4 chicken breasts</li><li>1 whole tomato</li> <li>1/4 tbs tears of children</li> </ul></div> </div><!-- end row ingredients --></div> <!-- end ingredients column --></div> <!-- end row image/ingredients --> </div> <!-- end search-result --></a>");
-        result.find("img").attr("src", based(doc.url));
+        var image = "";
+        if(/^.*\b(epicurious.com\/recipes)\b.*$/.test(doc.url)){
+            $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(doc.url) + '&callback=?', function(data){
+                var elements = $(data.contents);
+                var found = $('#recipe_image > img', elements);
+                //var image = "<img src=\"http://www.epicurious.com/" + found.attr("src") + "\" alt=\"image\">";
+                image = "http://www.epicurious.com" + found.attr("src");
+            })
+            .success(function() { var result = $('<a>', {href: doc.url, class:"results"});
+        result.append("<div class=\"search-result\"><div class=\"row\"><div class=\"col-lg-2\"><img src=\""+ image +"\" alt=\"image\"></div><div class=\"col-lg-10\"><h3 class=\"recipe-title\">" + doc.title + "</h3><div class=\"row\"> <div class=\"col-lg-6\"> <ul><li>Makes 4 servings</li> <li>Preperation Time: 15 minutes</li>   <li>Cooking Time: 1 hour</li></ul> </div><div class=\"col-lg-6\"> <ul><li>1/2 tsp garlic powder</li><li>4 chicken breasts</li><li>1 whole tomato</li> <li>1/4 tbs tears of children</li> </ul></div> </div><!-- end row ingredients --></div> <!-- end ingredients column --></div> <!-- end row image/ingredients --> </div> <!-- end search-result --></a>");
+        //result.find("img").attr("src", based(doc.url));
         $('#results').append(result);
+         });
+        }
     });
     //document.getElementById("results").style.display = "block";
 }
@@ -156,23 +165,24 @@ function noSuggestions($container) {
 }
 
 function based(url) {
+        var image = "";
         if(/^.*\b(allrecipes)\b.*$/.test(url)){
             $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
-            var elements = $(data.contents);
-            var found = $('#imgPhoto', elements);
-            //var image = "<img src=\"" + found.attr("src") + "\">"
-            var image = found.attr("src");
-            return image;
-            });
+                var elements = $(data.contents);
+                var found = $('#imgPhoto', elements);
+                //var image = "<img src=\"" + found.attr("src") + "\">"
+                image = found.attr("src");
+            })
+            .success(function() { return image; });
         }
         if(/^.*\b(epicurious.com\/recipes)\b.*$/.test(url)){
             $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
-            var elements = $(data.contents);
-            var found = $('#recipe_image > img', elements);
-            //var image = "<img src=\"http://www.epicurious.com/" + found.attr("src") + "\" alt=\"image\">";
-            var image = "http://www.epicurious.com" + found.attr("src");
-            return image;
-            });
+                var elements = $(data.contents);
+                var found = $('#recipe_image > img', elements);
+                //var image = "<img src=\"http://www.epicurious.com/" + found.attr("src") + "\" alt=\"image\">";
+                image = "http://www.epicurious.com" + found.attr("src");
+            })
+            .success(function() { return "fuck"; });
         }
 }
 
