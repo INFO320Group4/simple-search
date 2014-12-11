@@ -33,7 +33,7 @@ h1#logo {
 	text-indent: -9999999em; 
 }
 
-input#search-box {
+input#query {
 	width: 80%;
 	height: 50px;
 	padding: 2px 10px 2px 10px;
@@ -41,7 +41,7 @@ input#search-box {
 	color: #606060;
 }
 
-button#search-button {
+button#search {
 	height: 50px;
 	width: 10%;
 	font-size: 16px;
@@ -65,6 +65,8 @@ div.thumbnails {
 
 div.thumbnails img {
 	border: 3px solid #dddee0;
+	width: 175px;
+	height: 175px;
 }
 div.thumbnails img:hover {
 	border: 3px solid #ec870f;

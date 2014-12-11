@@ -76,7 +76,7 @@ function search(query, $container, $template){
 function renderResults(docs, $container, $template){
     //document.getElementById("results").style.display = "none";
     $container.empty(); // If there are any previous results, remove them
-
+    $( "#front-page-content" ).remove();
     var result;
     $.each(docs, function(index, doc){
         //result = $template.clone();
@@ -98,7 +98,7 @@ function renderResults(docs, $container, $template){
                 image = "http://www.epicurious.com" + found.attr("src");
             })
             .success(function() { var result = $('<a>', {href: doc.url, class:"results"});
-        result.append("<div class=\"search-result\"><div class=\"row\"><div class=\"col-lg-2\"><img src=\""+ image +"\" alt=\"image\"></div><div class=\"col-lg-10\"><h3 class=\"recipe-title\">" + doc.title + "</h3><div class=\"row\"> <div class=\"col-lg-6\"> <ul><li>Makes 4 servings</li> <li>Preperation Time: 15 minutes</li>   <li>Cooking Time: 1 hour</li></ul> </div><div class=\"col-lg-6\"> <ul><li>1/2 tsp garlic powder</li><li>4 chicken breasts</li><li>1 whole tomato</li> <li>1/4 tbs tears of children</li> </ul></div> </div><!-- end row ingredients --></div> <!-- end ingredients column --></div> <!-- end row image/ingredients --> </div> <!-- end search-result --></a>");
+        result.append("<div class=\"search-result\"><div class=\"row\"><div class=\"col-lg-2\"><img src=\""+ image +"\" alt=\"image\" width=\"125px\" height=\"125px\"></div><div class=\"col-lg-10\"><h3 class=\"recipe-title\">" + doc.title + "</h3><div class=\"row\"> <div class=\"col-lg-6\"> <ul><li>Makes 4 servings</li> <li>Preperation Time: 15 minutes</li>   <li>Cooking Time: 1 hour</li></ul> </div><div class=\"col-lg-6\"> <ul><li>1/2 tsp garlic powder</li><li>4 chicken breasts</li><li>1 whole tomato</li> <li>1/4 tbs tears of children</li> </ul></div> </div><!-- end row ingredients --></div> <!-- end ingredients column --></div> <!-- end row image/ingredients --> </div> <!-- end search-result --></a>");
         //result.find("img").attr("src", based(doc.url));
         $('#results').append(result);
          });
