@@ -237,7 +237,7 @@ function attachImageIngredients(image, docTitle, url, ingredients) {
     var row4 = document.createElement('div');
     row4.className = 'col-lg-6';
     row2.appendChild(row4);
-    var ingDiv = document.createElement('button');
+    var ingDiv = document.createElement('span');
     ingDiv.className = 'ingExpand';
     ingDiv.innerText = "Ingredient List";
     row4.appendChild(ingDiv);
