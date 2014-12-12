@@ -54,6 +54,7 @@ function search(query, $container, $template){
         jsonp: 'json.wrf',
         success: function (data) {
             $("#results").fadeToggle(0);
+            $("#loading").style.display = "block";
             // currently it works so that when no results found, show spell checks
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
@@ -64,6 +65,7 @@ function search(query, $container, $template){
                     noSuggestions($container);
                 }
             }
+            $("#loading").style.display = "none";
             $("#results").fadeToggle();
         }
     });
@@ -76,6 +78,7 @@ function search(query, $container, $template){
 function renderResults(docs, $container, $template){
     //document.getElementById("results").style.display = "none";
     $container.empty(); // If there are any previous results, remove them
+
     $( "#front-page-content" ).remove();
     var result;
     $.each(docs, function(index, doc) {
