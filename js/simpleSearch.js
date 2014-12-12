@@ -60,20 +60,23 @@ function search(query, $container, $template){
         data: ajaxData,
         jsonp: 'json.wrf',
         success: function (data) {
-            $('results').fadeToggle(0);
-            $('#front-page-content').fadeToggle();
+            $("#results").fadeToggle(0);
+
             enableDisplay("loading");
             // currently it works so that when no results found, show spell checks
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
             } else {
+                $('#front-page-content').empty();
                 if (!jQuery.isEmptyObject(data.spellcheck.suggestions)) {
                     renderSpellcheck(JSON.stringify(data.spellcheck.suggestions[1].suggestion), $container);
                 } else {
                     noSuggestions($container);
                 }
+                disableDisplay("loading");
+                enableDisplay("results");
             }
-            $("#results").fadeToggle();
+            // $("#results").fadeToggle();
         }
     });
 }
