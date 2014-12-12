@@ -65,19 +65,35 @@
 
       <div>
         <p>Imagine coming home from a long day of work and walking into the kitchen. You open the fridge and see a variety of different ingredients, but you’re at a loss at what exactly to make. This is where we come in.</p>
-        
-        <p>DansMonFrigo is a search service designed specifically to help the average citizen find recipes that utilize ingredients they have in their fridge. Our search service asks its users to list the ingredients that they currently have on hand. From there, DansMonFrigo will find results tailored to the specific set of ingredients provided. What’s unique about our search service is that our website returns users with results that lists ingredients used in each recipe. This way, users will be able to easily find out what ingredients are needed at a glance.</p>  
-        
-        <p>We know that we aren’t perfect and we are constantly striving to make our search service better for users like you! One idea that we thought would help users search items more easily is to create a list where users can add ingredients that have into said list. After they input all the ingredients that they have, they can click on the search box and recipes with said ingredients would pop up. Users would also be able to see ingredients that the website used that was similar to what they had by bolded/highlighted text.
-        </p>
+ 
+        <p>DansMonFrigo is a search service designed specifically to help the average citizen find recipes that utilize ingredients they have in their fridge. We have taken a few steps to prepare and make sure that initial attraction comes up to be positive. We have created a Facebook page along with a Twitter account to promote our product. These pages already have a bit of history as to how we started to develop our search service and gives site viewers a bit of the process. In terms of keeping users to our site, we designed a simple and user friendly interface that have received positive reviews. We added regex filters for Nutch to prevent it from crawling hyperlinks to other websites as we were primarily interested in getting the recipes off of known sites such as Epicurious or Allrecipes. We also used eDisMax to help with our search service search for the query words across multiple fields with different boosts, based on the significance of each field. On our website, we implemented the spell check on front end for better quality-of-life, incorporated bootstrap to make our site responsive, and added images and ingredients to search results.</p>
 
+        <p>How our search service works is that it asks its users to list the ingredients that they currently have on hand. From there, DansMonFrigo will find results tailored to the specific set of ingredients provided. What’s unique about our search service is that our website returns users with results that lists ingredients used in each recipe. This way, users will be able to easily find out what ingredients are needed at a glance.</p>
+
+        <p>Dans Mon Frigo is a search service designed specifically to help the average citizen find recipes that utilize ingredients they have in their fridge. We aren’t trying to compete to be the internet’s biggest recipe database. Instead, we’re looking to provide users with an intuitive way to find recipes using the ingredients they already have. Users will keep coming back to our site because the user will have a different set of ingredients to work with each time. This gives users a new experience every time they use our site!</p>
+
+        <p>This service is applicable to anyone who knows or wants to cook something, so basically 70% of the population. The service is great for helping people fully utilize what items they already have on hand and helps take away a bit of the confusion when they open their fridge and ask themselves, “What am I eating tonight?”</p>
+
+        <p>There are definitely many online recipe sites similar to ours, such as AllRecipes, Epicurious, and Yummly. Our primary competition is a site called Supercook which shares a similar idea for using what a person has and suggesting recipes based off of that. However, our website returns users with results that lists ingredients used in each recipe, which previously mentioned competitors don’t have as a feature. </p>
+
+        <p>There are many chances to work with some of the best collaborators in this industry. Of course, we are talking about food bloggers. By showing our site to local bloggers such as Gastrolust and Culinary Fool, traffic to our site can be increased greatly when they see our search service for themselves and advertise it to their followers.</p>
+
+        <p>Working with our backend, one aspect we wanted to work on was to get nutch plugins to work to extract ingredients from the web pages and store it as a field and be able to index and directly search for them. Initially we thought that configuring Nutch as our crawler would be as easy as changing a few lines of Java and compiling it together to get our own custom fields.  Little did we know that this would be the largest roadblock in getting both recipe images and an ingredient list.</p> 
+
+        <p>After countless failed attempts we found our savior in JSON.  Using JSON we could request the HTML of website URL’s in our Solr index and look into their code.  Normally this type of lookup is blocked due to Same-Origin policies in web security but we used JSONP as a workaround.  JSONP allowed us to efficiently find the images and ingredients for any recipe within our index.</p>
+
+        <p>We know that we aren’t perfect and we are constantly striving to make our search service better for users like you! One idea that we thought would help users search items more easily is to create a list where users can add ingredients that have into said list. After they input all the ingredients that they have, they can click on the search box and recipes with said ingredients would pop up. Users would also be able to see ingredients that the website used that was similar to what they had by bolded/highlighted text.</p>
+
+        <p><a href="visitor.png" />Google Analytics So Far</a></p>
+        <p>Unfortunately due to the popularity of the french song "Dans mon frigo" we are having difficulty reaching the front page of Google. Despite that our site has garnered nearly a solid user base using solely word of mouth. These users typically stay on the website for 8 minutes and 15 seconds with nearly 65% of them being returning users.</p>
+
+        <p>This assignment is for our INFO320 Class at UW. Do keep in mind that this is a prototype. All feedback is welcome!</p>
+        
+        
         <p>Previous marketing plan: https://docs.google.com/document/d/1hLkWTgK5gjEC6eMTgUMiE6ChVWRX1kX2cTpOFLqxfFM/ </p>
 
         <p>Previous Technical plan: https://drive.google.com/drive/#folders/0B5zFkotxbpnFZXVPMjVlZG9pM1U </p>
-
-        <p><a href="visitor.png" />Google Analytics</a></p>
-        <p>Unfortunately due to the populatrity of the french song "Dans mon frigo" we are having difficulty reaching the front page of Google. Despite that our site has garnered nearly a solid userbase using solely word of mouth. These users typically stay on the website for 8 minutes and 15 seconds with nearly 65% of them being returning users.</p>
-
+        
         <h2>Social: </h2>
         <p><a href="https://twitter.com/DansMonFrigo">Twitter</a>, <a href="https://www.facebook.com/Dansmonfrigo">Facebook</a></p>
 
