@@ -60,9 +60,9 @@ function search(query, $container, $template){
         data: ajaxData,
         jsonp: 'json.wrf',
         success: function (data) {
-            $("#results").fadeToggle(0);
+            // $("#results").fadeToggle(0);
 
-            enableDisplay("loading");
+            // enableDisplay("loading");
             // currently it works so that when no results found, show spell checks
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
@@ -73,8 +73,8 @@ function search(query, $container, $template){
                 } else {
                     noSuggestions($container);
                 }
-                disableDisplay("loading");
-                enableDisplay("results");
+                // disableDisplay("loading");
+                // enableDisplay("results");
             }
             // $("#results").fadeToggle();
         }
@@ -93,21 +93,11 @@ function renderResults(docs, $container, $template){
 
     var result;
     $.each(docs, function(index, doc) {
-        //result = $template.clone();
-        //result.find( "a" ).prop( "href", doc.url);
-        //result.find( "h3" ).append( doc.title );
-        //result.find( ".url" ).append( doc.url );
-        //result.find( ".content" ).append( maxWords(doc.content, 100) );
-        // result.find(".content").append(pictureResults(doc.url, doc.content));
-        //result.find(".col-lg-2 > img").attr("src", based(doc.url));
-        //result.removeClass( "template" );
-        //$container.append(result);
         getResults(doc);
-
     });
 
-    setTimeout(disableDisplay("loading"), 500);
-    $('#results').fadeToggle();
+    // disableDisplay("loading");
+    // $('#results').fadeToggle();
 
 }
 
@@ -160,6 +150,7 @@ function renderSpellcheck(suggestions, $container) {
     });
 }
 
+// if no spell check suggestion is avaiable
 function noSuggestions($container) {
     $container.empty();
 
@@ -168,6 +159,7 @@ function noSuggestions($container) {
     $container.append(result);
 }
 
+// get results
 function getResults(doc) {
     var image = "";
     var ingredients = new Array();
@@ -198,6 +190,7 @@ function getResults(doc) {
     }
 }
 
+// attaches image and ingredients to result
 function attachImageIngredients(image, docTitle, url, ingredients) {
     
     var container = document.createElement("div");
