@@ -53,7 +53,8 @@ function search(query, $container, $template){
         data: ajaxData,
         jsonp: 'json.wrf',
         success: function (data) {
-            $("#results").fadeToggle(0);
+            $('results').fadeToggle(0);
+            $('#front-page-content').fadeToggle();
             enableDisplay("loading");
             // currently it works so that when no results found, show spell checks
             if (data.response.numFound != 0) {
@@ -65,6 +66,7 @@ function search(query, $container, $template){
                     noSuggestions($container);
                 }
             }
+            $( '#front-page-content' ).remove();
         }
     });
 }
@@ -76,7 +78,6 @@ function search(query, $container, $template){
 function renderResults(docs, $container, $template){
     //document.getElementById("results").style.display = "none";
     $container.empty(); // If there are any previous results, remove them
-    $( "#front-page-content" ).remove();
 
     var result;
     $.each(docs, function(index, doc) {
@@ -92,8 +93,8 @@ function renderResults(docs, $container, $template){
         getResults(doc);
 
     });
-    setTimeout(disableDisplay("loading"), 1000);
-    $("#results").fadeToggle();
+    setTimeout(disableDisplay("loading"), 500);
+    $('#results').fadeToggle();
 }
 
 // Cuts off lengthy content to a given maximum number of words
@@ -211,11 +212,23 @@ function attachIngredients(ingredients) {
     $('#results').append(result);
 }
 
+// disables display of something
 function disableDisplay(iD) {
     document.getElementById(iD).style.display = "none";
 }
 
 
+// enables display of something
 function enableDisplay(iD) {
     document.getElementById(iD).style.display = "block";
+}
+
+// inserts loading gif to given id
+function insertLoading(iD) {
+    var div = document.createElement("div");
+    div.id = "loading";
+    var gif = document.createElement("img");
+    gif.src = "css/images/loading.gif";
+    div.appendChild(gif);
+    $("." + iD).append(div);
 }
