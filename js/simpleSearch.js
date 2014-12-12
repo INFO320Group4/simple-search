@@ -54,7 +54,7 @@ function search(query, $container, $template){
         jsonp: 'json.wrf',
         success: function (data) {
             $("#results").fadeToggle(0);
-            $("#loading").style.display = "block";
+            enableDisplay("loading");
             // currently it works so that when no results found, show spell checks
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
@@ -65,8 +65,6 @@ function search(query, $container, $template){
                     noSuggestions($container);
                 }
             }
-            $("#loading").style.display = "none";
-            $("#results").fadeToggle();
         }
     });
 }
@@ -78,8 +76,8 @@ function search(query, $container, $template){
 function renderResults(docs, $container, $template){
     //document.getElementById("results").style.display = "none";
     $container.empty(); // If there are any previous results, remove them
-
     $( "#front-page-content" ).remove();
+
     var result;
     $.each(docs, function(index, doc) {
         //result = $template.clone();
@@ -94,6 +92,8 @@ function renderResults(docs, $container, $template){
         getResults(doc);
 
     });
+    setTimeout(disableDisplay("loading"), 1000);
+    $("#results").fadeToggle();
 }
 
 // Cuts off lengthy content to a given maximum number of words
@@ -117,6 +117,7 @@ function maxWords(content, max) {
 // Output: void
 function renderSpellcheck(suggestions, $container) {
     $container.empty(); // If there are any previous results, remove them
+    $("#front-page-content").empty();
 
     var spellings = JSON.parse(suggestions);
     
@@ -140,6 +141,9 @@ function renderSpellcheck(suggestions, $container) {
     }
     result.innerHTML += "?";
     $container.append(result);
+
+    $("#results").fadeToggle();
+    
     $( ".spellings" ).on("click", function() {
         search(event.target.id, $( "#results" ), $( ".template.result" ));
     });
@@ -147,7 +151,8 @@ function renderSpellcheck(suggestions, $container) {
 
 function noSuggestions($container) {
     $container.empty();
-
+//    $("#front-page-content").empty();
+    
     var result = document.createElement("h3");
     result.innerHTML = "This ingredient is not what you're looking for.";
     $container.append(result);
@@ -204,4 +209,13 @@ function attachIngredients(ingredients) {
         result.appendChild(li);
     }
     $('#results').append(result);
+}
+
+function disableDisplay(iD) {
+    document.getElementById(iD).style.display = "none";
+}
+
+
+function enableDisplay(iD) {
+    document.getElementById(iD).style.display = "block";
 }

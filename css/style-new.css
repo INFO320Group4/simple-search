@@ -137,3 +137,7 @@ div.search-result ul {
 div.search-result a {
 	text-decoration: none;
 }
+
+#loading {
+	text-align: center;
+}
