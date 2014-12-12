@@ -60,13 +60,9 @@ function search(query, $container, $template){
         data: ajaxData,
         jsonp: 'json.wrf',
         success: function (data) {
-<<<<<<< HEAD
             $('results').fadeToggle(0);
             $('#front-page-content').fadeToggle();
             enableDisplay("loading");
-=======
-            $("#results").fadeToggle(0);
->>>>>>> origin/master
             // currently it works so that when no results found, show spell checks
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
@@ -77,11 +73,7 @@ function search(query, $container, $template){
                     noSuggestions($container);
                 }
             }
-<<<<<<< HEAD
-            $( '#front-page-content' ).remove();
-=======
             $("#results").fadeToggle();
->>>>>>> origin/master
         }
     });
 }
