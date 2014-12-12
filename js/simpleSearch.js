@@ -150,35 +150,6 @@ function noSuggestions($container) {
     $container.append(result);
 }
 
-
-function getIngredients(url) {
-    var allRecipe = "http://allrecipes.com/Recipe";
-    var epicurious = "http://www.epicurious.com/recipes/food";
-
-    var ingredients = new Array();
-/*
-   if (url.startsWith(allRecipe)) {
-        
-    }
-*/        
-    if (url.startsWith(epicurious)) {
-        $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {
-            var elements = $(data.contents);
-            var found = $('.ingredient', elements);
-            
-            for (var i = 0; i < found.length; i++) {
-                ingredients[i] = found[i].innerText;
-                // alert(ingredients[i]);
-            }
-        })
-        .success(function() { 
-
-        });
-        
-    }       
-}
-
-
 function getResults(doc) {
     var image = "";
     var ingredients = new Array();
