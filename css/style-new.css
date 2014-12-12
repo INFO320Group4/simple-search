@@ -53,6 +53,8 @@ button#search {
 }
 .ingExpand {
 	background: #ec870f;
+	color: #ffffff;
+	font-size: 16px;
 }
 
 form#search-form {
