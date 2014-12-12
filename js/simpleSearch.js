@@ -1,3 +1,10 @@
+function EventHandler(){
+    $('.ingredients').hide();
+    $('.ingExpand').on('click', function() {
+        $(this).parent().find('ul').toggle();
+    });
+}
+
 var firstSearch = true;
 // Doc ready
 $(function(){
@@ -54,7 +61,6 @@ function search(query, $container, $template){
         jsonp: 'json.wrf',
         success: function (data) {
             $("#results").fadeToggle(0);
-            enableDisplay("loading");
             // currently it works so that when no results found, show spell checks
             if (data.response.numFound != 0) {
                 renderResults(data.response.docs, $container, $template);
@@ -65,6 +71,7 @@ function search(query, $container, $template){
                     noSuggestions($container);
                 }
             }
+            $("#results").fadeToggle();
         }
     });
 }
@@ -77,7 +84,6 @@ function renderResults(docs, $container, $template){
     //document.getElementById("results").style.display = "none";
     $container.empty(); // If there are any previous results, remove them
     $( "#front-page-content" ).remove();
-
     var result;
     $.each(docs, function(index, doc) {
         //result = $template.clone();
@@ -92,8 +98,6 @@ function renderResults(docs, $container, $template){
         getResults(doc);
 
     });
-    setTimeout(disableDisplay("loading"), 1000);
-    $("#results").fadeToggle();
 }
 
 // Cuts off lengthy content to a given maximum number of words
@@ -117,7 +121,6 @@ function maxWords(content, max) {
 // Output: void
 function renderSpellcheck(suggestions, $container) {
     $container.empty(); // If there are any previous results, remove them
-    $("#front-page-content").empty();
 
     var spellings = JSON.parse(suggestions);
     
@@ -141,9 +144,6 @@ function renderSpellcheck(suggestions, $container) {
     }
     result.innerHTML += "?";
     $container.append(result);
-
-    $("#results").fadeToggle();
-    
     $( ".spellings" ).on("click", function() {
         search(event.target.id, $( "#results" ), $( ".template.result" ));
     });
@@ -151,8 +151,7 @@ function renderSpellcheck(suggestions, $container) {
 
 function noSuggestions($container) {
     $container.empty();
-//    $("#front-page-content").empty();
-    
+
     var result = document.createElement("h3");
     result.innerHTML = "This ingredient is not what you're looking for.";
     $container.append(result);
@@ -174,8 +173,7 @@ function getResults(doc) {
             }
         })
         .success(function() { 
-            attachImage(image, doc.title, doc.url);
-            attachIngredients(ingredients);
+            attachImageIngredients(image, doc.title, doc.url, ingredients);
         });
     } else if(/^.*\b(allrecipes)\b.*$/.test(doc.url)) {
         $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(doc.url) + '&callback=?', function(data) {
@@ -184,38 +182,69 @@ function getResults(doc) {
             image = found.attr("src");
         })
         .success(function() { 
-            attachImage(image, doc.title, doc.url);
-            attachIngredients(ingredients);
+            attachImageIngredients(image, doc.title, doc.url, ingredients);
         });
     }
 }
 
-function attachImage(image, title, url) {
-    var result = $('<a>', { 
-                href: url, 
-                class:"results"
-    });
-
-    result.append("<div class=\"search-result\"><div class=\"row\"><div class=\"col-lg-2\"><img src=\""+ image +"\" alt=\"image\" width=\"125px\" height=\"125px\"></div><div class=\"col-lg-10\"><h3 class=\"recipe-title\">" + title + "</h3><div class=\"row\"> <div class=\"col-lg-6\"> <ul><li>Makes 4 servings</li> <li>Preperation Time: 15 minutes</li>   <li>Cooking Time: 1 hour</li></ul> </div><div class=\"col-lg-6\"> <ul><li>1/2 tsp garlic powder</li><li>4 chicken breasts</li><li>1 whole tomato</li> <li>1/4 tbs tears of children</li> </ul></div> </div><!-- end row ingredients --></div> <!-- end ingredients column --></div> <!-- end row image/ingredients --> </div> <!-- end search-result --></a>");
-    $('#results').append(result);
-}
-
-function attachIngredients(ingredients) {
-    var result = document.createElement("ul");
-    result.className = "ingredients";
+function attachImageIngredients(image, docTitle, url, ingredients) {
+    
+    var container = document.createElement("div");
+    container.className = "search-result";
+    var row = document.createElement('div');
+    row.className = 'row';
+    container.appendChild(row);
+    var rowimg = document.createElement('div');
+    rowimg.className = 'col-lg-2';
+    row.appendChild(rowimg);
+    var img = document.createElement('img');
+    img.src =  image;
+    img.alt = "recipePhoto";
+    img.style.cssText = "width:125px; height:125px"
+    rowimg.appendChild(img);
+    var title = document.createElement('div');
+    title.className = 'col-lg-10';
+    row.appendChild(title);
+    var result = document.createElement("a");
+    result.href = url;
+    result.className = "results";
+    title.appendChild(result);
+    var h3 = document.createElement('h3');
+    h3.className = 'recipe-title';
+    h3.innerText = docTitle;
+    result.appendChild(h3);
+    var row2 = document.createElement('div');
+    row2.className = 'row';
+    title.appendChild(row2);
+    var row3 = document.createElement('div');
+    row3.className = 'col-lg-6';
+    row2.appendChild(row3);
+    var ul1 = document.createElement('ul');
+    row3.appendChild(ul1);
+    var size = document.createElement('li');
+    size.innerText = "Makes 4 servings";
+    ul1.appendChild(size);
+    var prep = document.createElement('li');
+    prep.innerText = "Preparation Time: 15 minutes";
+    ul1.appendChild(prep);
+    var cookTime = document.createElement('li');
+    cookTime.innerText = "1 hour";
+    ul1.appendChild(cookTime);
+    var row4 = document.createElement('div');
+    row4.className = 'col-lg-6';
+    row2.appendChild(row4);
+    var ingDiv = document.createElement('button');
+    ingDiv.className = 'ingExpand';
+    ingDiv.innerText = "Ingredient List";
+    row4.appendChild(ingDiv);
+    var list = document.createElement("ul");
+    list.className = "ingredients";
+    row4.appendChild(list);
     for (var i = 0; i < ingredients.length; i++) {
         var li = document.createElement("li");
         li.innerText = ingredients[i];
-        result.appendChild(li);
+        list.appendChild(li);
     }
-    $('#results').append(result);
-}
-
-function disableDisplay(iD) {
-    document.getElementById(iD).style.display = "none";
-}
-
-
-function enableDisplay(iD) {
-    document.getElementById(iD).style.display = "block";
+    $('#results').append(container);
+    EventHandler();
 }
